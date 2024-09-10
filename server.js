@@ -1,4 +1,4 @@
-// server.js
+
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import cors from 'cors';
@@ -18,7 +18,7 @@ app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    // Verifica se o usuário já existe
+
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
@@ -27,10 +27,10 @@ app.post('/register', async (req, res) => {
       return res.status(400).json({ message: 'Usuário já existe' });
     }
 
-    // Criptografar a senha
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Criar novo usuário
+
     const newUser = await prisma.user.create({
       data: {
         name,
